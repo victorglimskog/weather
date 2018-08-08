@@ -1,14 +1,13 @@
 import { setForecast } from '../actions'
 import axios from 'axios'
 
-export const fetchForecast = () => async dispatch => {
-    const url = 'http://api.apixu.com/v1/forecast.json?key=439c11a67dfd43b292c190003181207&q=Malmö&days=7'
+export const fetchForecast = (city) => async dispatch => {
+    const url = `http://api.apixu.com/v1/forecast.json?key=439c11a67dfd43b292c190003181207&q=${city}&days=7`
     let forecastData = null
     let response = null
 
     try {
         response = await axios.get(url).then(response => response)
-        console.log('response: ', response)
     } catch( err ) {
         throw new Error('There was a problem when fetching from the weather API')
     }
@@ -19,13 +18,20 @@ export const fetchForecast = () => async dispatch => {
         throw new Error('No forecast data found for the given location')
     }
 
-    return response.data.forecast.forecastday
+    return {
+        forecastDays: response.data.forecast.forecastday,
+        location: {
+            cityName: response.data.location.name,
+            country: response.data.location.country,
+        }
+    }
 }
 
-export const loadForecast = () => async dispatch => {
+export const loadForecast = (city) => async dispatch => {
     let data = null
+
     try {
-        data = await dispatch(fetchForecast())
+        data = await dispatch(fetchForecast(city))
     } catch (err) {
         data = []
     }

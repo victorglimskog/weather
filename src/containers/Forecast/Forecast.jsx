@@ -5,9 +5,9 @@ import ForecastItem from '../../components/ForecastItem'
 import { loadForecast } from '../../services/weather-service'
 
 const mapStateToProps = state => {
-    console.log('state: ', state)
     return {
-        forecast: state.weather.forecast,
+        forecast: state.weather.forecast.forecastDays,
+        location: state.weather.forecast.location,
     }
 }
 
@@ -19,20 +19,27 @@ class Forecast extends Component {
     }
 
     render() {
-        const { forecast } = this.props
+        const { forecast, location } = this.props
 
         return (
             <div className="forecast">
                 {   forecast
                     ? (
-                        forecast.map( (day, index) => (
-                            <ForecastItem
-                                key={`forecastday${index}`}
-                                date={day.date}
-                                day={day.day}
-                                astro={day.astro}
-                            />
-                        ))
+                        <div className="forecast--inner">
+                            <div className="forecast--location">
+                                <p> Showing 7 day forecast for {location.cityName}, {location.country} </p>
+                            </div>
+                            <div className="forecast--days">
+                                {forecast.map( (day, index) => (
+                                    <ForecastItem
+                                        key={`forecastday${index}`}
+                                        date={day.date}
+                                        day={day.day}
+                                        astro={day.astro}
+                                    />
+                                ))}
+                            </div>
+                        </div>
                     )
                     : ( null )}
             </div>
