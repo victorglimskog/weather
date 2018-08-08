@@ -15,13 +15,22 @@ body {
 	padding: 20px;
 	font-weight: bold;
 	font-size: 3rem;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
 }
 
 .header--logo {
 	color: white;
 }
 
-.forecast {
+.forecast--location {
+	font-size: 36px;
+	color: white;
+	text-align: center;
+}
+
+.forecast--days {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
@@ -48,4 +57,66 @@ body {
 
 .forecast--item--avg-temp::after {
 	content: '\00b0';
+}
+
+.forecast--welcome-message {
+	margin-top: 36px;
+	font-size: 36px;
+	color: white;
+	text-align: center;
+}
+
+.forecast--error-message {
+	margin-top: 36px;
+	font-size: 36px;
+	color: white;
+	text-align: center;
+}
+
+.forecast--loading-message {
+	margin-top: 36px;
+	font-size: 36px;
+	color: white;
+	text-align: center;
+}
+
+.city-filter {
+	display: flex;
+	align-items: center;
+}
+
+.city-filter--form {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.city-filter--form--input {
+	height: 36px;
+	width: 200px;
+	font-family: tahoma;
+	font-size: 18px;
+	color: #ccc;
+	text-align: center;
+	border-style: solid;
+	border: none;
+}
+
+.city-filter--form--button {
+	height: 38px;
+	font-size: 18px;
+	background-color: rgb(66, 94, 153);
+	color: white;
+	border: none;
+	margin-left: 10px;
+	width: 76px;
+}
+
+.city-filter--form--button:hover {
+	cursor: pointer;
+	background-color: rgb(85, 105, 150);
+}
+
+.city-filter--form--input:focus, .city-filter--form--button:active {
+	outline: none;
 }
