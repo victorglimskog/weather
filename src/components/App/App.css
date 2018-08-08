@@ -59,6 +59,27 @@ body {
 	content: '\00b0';
 }
 
+.forecast--welcome-message {
+	margin-top: 36px;
+	font-size: 36px;
+	color: white;
+	text-align: center;
+}
+
+.forecast--error-message {
+	margin-top: 36px;
+	font-size: 36px;
+	color: white;
+	text-align: center;
+}
+
+.forecast--loading-message {
+	margin-top: 36px;
+	font-size: 36px;
+	color: white;
+	text-align: center;
+}
+
 .city-filter {
 	display: flex;
 	align-items: center;

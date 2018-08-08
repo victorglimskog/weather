@@ -1,9 +1,8 @@
-import { setForecast } from '../actions'
+import { setForecast, setForecastLoading, setForecastError } from '../actions'
 import axios from 'axios'
 
 export const fetchForecast = (city) => async dispatch => {
     const url = `http://api.apixu.com/v1/forecast.json?key=439c11a67dfd43b292c190003181207&q=${city}&days=7`
-    let forecastData = null
     let response = null
 
     try {
@@ -31,9 +30,12 @@ export const loadForecast = (city) => async dispatch => {
     let data = null
 
     try {
+        dispatch(setForecastLoading(true))
         data = await dispatch(fetchForecast(city))
     } catch (err) {
         data = []
+        dispatch(setForecastError(err))
     }
     dispatch(setForecast(data))
+    dispatch(setForecastLoading(false))
 }

@@ -2,24 +2,36 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import ForecastItem from '../../components/ForecastItem'
-import { loadForecast } from '../../services/weather-service'
 
 const mapStateToProps = state => {
     return {
         forecast: state.weather.forecast.forecastDays,
         location: state.weather.forecast.location,
+        loading: state.weather.loading,
+        error: state.weather.error,
     }
 }
 
 class Forecast extends Component {
 
-    componentDidMount() {
-        const { dispatch } = this.props
-        dispatch(loadForecast())
-    }
-
     render() {
-        const { forecast, location } = this.props
+        const { forecast, location, loading, error } = this.props
+
+        if ( loading ) {
+            return (
+                <div className="forecast--loading-message">
+                    Loading ...
+                </div>
+            )
+        }
+
+        if ( error ) {
+            return (
+                <div className="forecast--error-message">
+                    {error.message}
+                </div>
+            )
+        }
 
         return (
             <div className="forecast">
@@ -41,7 +53,11 @@ class Forecast extends Component {
                             </div>
                         </div>
                     )
-                    : ( null )}
+                    : (
+                        <div className="forecast--welcome-message">
+                            Please enter a city name to get a 7 day forecast
+                        </div>
+                    )}
             </div>
         )
     }
