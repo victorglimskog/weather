@@ -1,5 +1,5 @@
 import React from 'react';
-import CityFilter from '../CityFilter'
+import CityFilter from '../../containers/CityFilter'
 
 const Header = () => (
     <div className="header">
